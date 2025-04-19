@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Rest-With-Spring-Boot.iml" filepath="$PROJECT_DIR$/.idea/Rest-With-Spring-Boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rest-With-Spring-Boot/Rest-With-Spring-Boot.iml" filepath="$PROJECT_DIR$/Rest-With-Spring-Boot/Rest-With-Spring-Boot.iml" />
     </modules>
   </component>
 </project>
