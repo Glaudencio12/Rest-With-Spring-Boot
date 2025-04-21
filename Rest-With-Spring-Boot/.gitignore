@@ -33,5 +33,5 @@ build/
 .vscode/
 
 ### Arquivo de anotação ###
-anotacoes.txt
+/anotacoes.txt
 

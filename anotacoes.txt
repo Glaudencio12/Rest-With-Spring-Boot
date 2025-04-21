@@ -1,4 +1,4 @@
-#### TRATANDO EXCEÇÕES CUSTOMIZADAS ####
+############################################################## TRATANDO EXCEÇÕES CUSTOMIZADAS #################################################################
 
 1 - Criar um record para retornar um Json com a exceção, sendo assim, mais amigável para o usuário. Exemplo:
 
@@ -41,5 +41,42 @@ Após realizar isso, criam-se os métodos que vão realizar esse tratamento da i
             Uma descrição da requisição, como a URL
         * Retorna o objeto response com status HTTP 500 – Internal Server Error
 Esse método pode ser modificado para tratar uma exceção customizada subtituindo apenas o statusCode e o valor do @ExceptionHandler(Exception.class) pelo nome da exceção
+
+#######################################################Icf NJEÇÃO DE DEPENDÊNCIAS#######################################################################
+- @Service
+- @Autowired
+
+1 - @Service
+    * A anotação `@Service` é usada para marcar uma classe de serviço no Spring. Isso basicamente diz ao SprinG
+        > "Ei, essa classe aqui contém regras de negócio! Quero que você cuide dela pra mim!"
+    Quando usar?
+        * Quando você quer separar a lógica da aplicação em camadas
+    Exemplo:
+        @Service
+        public class PersonServices {
+            public Person findById(String id) {
+                // lógica para buscar a pessoa
+            }
+        }
+    O Spring cria automaticamente uma instância (objeto) dessa classe e a disponibiliza para ser usada em outras partes do código,
+    sem que você precise fazer `new PersonServices()`.
+
+2 - @Autowired
+    * usado para injeção de dependência automática. Isso significa que o Spring vai "injetar" (ou seja, fornecer) um objeto pronto para você,
+    sem você precisar criar manualmente com `new`.
+    Exemplo:
+        @RestController
+        public class PersonController {
+            @Autowired
+            private PersonServices services;
+        }
+Isso é muito útil porque:
+    - Você **não precisa se preocupar com instanciar manualmente**
+    - Ajuda a manter seu código **mais limpo e organizado**
+
+Como isso tudo funciona junto?
+    1. O Spring vê a anotação `@Service` → cria um objeto da classe `PersonServices`
+    2. O Spring vê `@Autowired` na `PersonController` → injeta automaticamente o objeto do passo 1
+    3. Quando uma requisição chega em `/person/{id}`, o controller usa o service pra buscar a pessoa
 
 

@@ -1,6 +1,5 @@
 package br.com.Glaudencio12.exception.handler;
 
-import br.com.Glaudencio12.exception.DivisionByZeroException;
 import br.com.Glaudencio12.exception.ExceptionResponse;
 import br.com.Glaudencio12.exception.UnsupportedMathOperationException;
 import org.springframework.http.HttpStatus;
