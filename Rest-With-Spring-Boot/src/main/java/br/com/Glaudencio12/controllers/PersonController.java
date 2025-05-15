@@ -1,7 +1,7 @@
 package br.com.Glaudencio12.controllers;
 
+import br.com.Glaudencio12.dto.PersonDTO;
 import br.com.Glaudencio12.services.PersonServices;
-import br.com.Glaudencio12.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
     @Autowired
     private PersonServices services;
 
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PersonDTO create(@RequestBody PersonDTO person){
+        return services.create(person);
+    }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable("id") Long id){
+    public PersonDTO findById(@PathVariable("id") Long id){
         return services.findByiD(id);
     }
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll(){
+    public List<PersonDTO> findAll(){
         return services.findAll();
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Person create(@RequestBody Person person){
-        return services.Create(person);
-    }
-
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Person update(@RequestBody Person person){
-        return services.updatePerson(person);
+    public PersonDTO update(@RequestBody PersonDTO person){
+        return services.updatePersonDTO(person);
     }
 
     @DeleteMapping("/{id}")
