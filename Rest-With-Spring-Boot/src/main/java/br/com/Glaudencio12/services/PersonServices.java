@@ -2,6 +2,7 @@ package br.com.Glaudencio12.services;
 
 import br.com.Glaudencio12.controllers.PersonController;
 import br.com.Glaudencio12.dto.PersonDTO;
+import br.com.Glaudencio12.exception.RequireObjectIsNullException;
 import br.com.Glaudencio12.exception.ResourceNotFoundException;
 import br.com.Glaudencio12.mapper.ObjectMapper;
 import br.com.Glaudencio12.model.Person;
@@ -32,6 +33,9 @@ public class PersonServices {
     }
 
     public PersonDTO create(PersonDTO person){
+        if (person == null) {
+            throw new RequireObjectIsNullException();
+        }
         logger.info("Create one Person!");
         var entity = ObjectMapper.parseObject(person, Person.class);
         var dto = ObjectMapper.parseObject(repository.save(entity), PersonDTO.class);
@@ -55,6 +59,9 @@ public class PersonServices {
     }
 
     public PersonDTO updatePersonDTO(PersonDTO person){
+        if (person == null) {
+            throw new RequireObjectIsNullException();
+        }
         logger.info("Updating one person!");
         Person entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("Not records found for this id"));
         entity.setFirstName(person.getFirstName());

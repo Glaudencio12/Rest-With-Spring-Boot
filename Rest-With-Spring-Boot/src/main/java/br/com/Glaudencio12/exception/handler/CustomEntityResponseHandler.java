@@ -1,6 +1,7 @@
 package br.com.Glaudencio12.exception.handler;
 
 import br.com.Glaudencio12.exception.ExceptionResponse;
+import br.com.Glaudencio12.exception.RequireObjectIsNullException;
 import br.com.Glaudencio12.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,13 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(Exception e, WebRequest request){
-        ExceptionResponse response = new ExceptionResponse(new Date(), e.getMessage(), request.getDescription(true));
+        ExceptionResponse response = new ExceptionResponse(new Date(), e.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RequireObjectIsNullException.class)
+    public final ResponseEntity<ExceptionResponse> handlerBadRequestException(Exception e, WebRequest request){
+        ExceptionResponse response = new ExceptionResponse(new Date(), e.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
