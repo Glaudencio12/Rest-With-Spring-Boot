@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface PersonControllerDocs {
-    @Operation(summary = "Create a person", description = "Create a person passing on his name, surname, gender and address",
+    @Operation(summary = "Create a person", description = "Create a person passing on his name, surname, gender and address", tags = {"People"},
             responses = {
                     @ApiResponse(
                             description = "Success",
