@@ -1,8 +1,9 @@
-package br.com.Glaudencio12.services;
+package br.com.Glaudencio12.unitTests.service;
 
 import br.com.Glaudencio12.dto.PersonDTO;
 import br.com.Glaudencio12.exception.RequireObjectIsNullException;
-import br.com.Glaudencio12.mocks.MockPerson;
+import br.com.Glaudencio12.services.PersonServices;
+import br.com.Glaudencio12.unitTests.mocks.MockPerson;
 import br.com.Glaudencio12.model.Person;
 import br.com.Glaudencio12.repository.PersonRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

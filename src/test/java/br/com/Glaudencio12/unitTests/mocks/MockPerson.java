@@ -1,4 +1,4 @@
-package br.com.Glaudencio12.mocks;
+package br.com.Glaudencio12.unitTests.mocks;
 
 import br.com.Glaudencio12.dto.PersonDTO;
 import br.com.Glaudencio12.model.Person;
