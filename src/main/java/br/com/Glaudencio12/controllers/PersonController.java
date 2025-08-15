@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/person/v1")
@@ -48,10 +49,16 @@ public class PersonController implements PersonControllerDocs {
         return services.updatePersonDTO(person);
     }
 
-    @PatchMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
+    @PatchMapping(value = "/enable/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
     @Override
     public PersonDTO enablePerson(@PathVariable("id") Long id) {
         return services.enablePerson(id);
+    }
+
+    @PatchMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
+    @Override
+    public PersonDTO patchPersonDynamic(@PathVariable("id") Long id, @RequestBody Map<String, Object> campos) {
+        return services.patchPersonDynamic(id, campos);
     }
 
     @DeleteMapping("/{id}")

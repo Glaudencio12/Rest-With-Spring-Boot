@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PersonControllerDocs {
     @Operation(summary = "Create a person", description = "Create a person passing on his name, surname, gender and address", tags = {"People"},
@@ -94,6 +95,22 @@ public interface PersonControllerDocs {
             }
     )
     PersonDTO enablePerson (@PathVariable("id") Long id);
+
+    @Operation(summary = "Partially updates a person's data", description = "Partially updates a person's data", tags = {"People"},
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = PersonDTO.class))
+                    ),
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
+    PersonDTO patchPersonDynamic (@PathVariable("id") Long id, @RequestBody Map<String, Object> campos);
 
     @Operation(summary = "Delete a person", description = "Delete a person by your id", tags = {"People"},
             responses = {
