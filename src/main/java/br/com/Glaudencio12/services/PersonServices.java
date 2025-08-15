@@ -7,6 +7,7 @@ import br.com.Glaudencio12.exception.ResourceNotFoundException;
 import br.com.Glaudencio12.mapper.ObjectMapper;
 import br.com.Glaudencio12.model.Person;
 import br.com.Glaudencio12.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,17 @@ public class PersonServices {
         entity.setGender(person.getGender());
 
         var dto = ObjectMapper.parseObject(repository.save(entity), PersonDTO.class);
+        hateoasLinks(dto);
+        return dto;
+    }
+
+    @Transactional
+    public PersonDTO enablePerson(Long id){
+        logger.info("Enabling one person!");
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not records found for this id"));
+        repository.enabledPerson(id);
+        var entity = repository.findById(id).get();
+        var dto = ObjectMapper.parseObject(entity, PersonDTO.class);
         hateoasLinks(dto);
         return dto;
     }

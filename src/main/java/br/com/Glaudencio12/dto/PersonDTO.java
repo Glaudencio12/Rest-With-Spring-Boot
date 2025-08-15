@@ -15,4 +15,5 @@ public class PersonDTO extends RepresentationModel<PersonDTO> {
     private String address;
     @JsonSerialize(using = GenderSerializer.class)
     private String gender;
+    private boolean enabled;
 }
