@@ -7,14 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MockPerson {
-    public Person mockEntity() {
-        return mockEntity(0);
-    }
-    
-    public PersonDTO mockDTO() {
-        return mockDTO(0);
-    }
-    
+
     public List<Person> mockEntityList() {
         List<Person> persons = new ArrayList<Person>();
         for (int i = 0; i < 14; i++) {
