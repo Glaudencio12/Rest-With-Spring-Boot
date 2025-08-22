@@ -56,7 +56,7 @@ class PersonServicesTest {
         assertNotNull(result.getLinks());
 
         assertLinks(result, "self", "/api/person/v1/1", "GET");
-        assertLinks(result, "FindAll", "/api/person/v1/all", "GET");
+        assertLinks(result, "FindAll", "/api/person/v1", "GET");
         assertLinks(result, "Create", "/api/person/v1", "POST");
         assertLinks(result, "Update", "/api/person/v1", "PUT");
         assertLinks(result, "Delete", "/api/person/v1/1", "DELETE");
@@ -76,7 +76,7 @@ class PersonServicesTest {
         assertNotNull(result.getLinks());
 
         assertLinks(result, "self", "/api/person/v1/1", "GET");
-        assertLinks(result, "FindAll", "/api/person/v1/all", "GET");
+        assertLinks(result, "FindAll", "/api/person/v1", "GET");
         assertLinks(result, "Create", "/api/person/v1", "POST");
         assertLinks(result, "Update", "/api/person/v1", "PUT");
         assertLinks(result, "Delete", "/api/person/v1/1", "DELETE");
@@ -106,7 +106,7 @@ class PersonServicesTest {
         var result = service.updatePersonDTO(dto);
 
         assertLinks(result, "self", "/api/person/v1/1", "GET");
-        assertLinks(result, "FindAll", "/api/person/v1/all", "GET");
+        assertLinks(result, "FindAll", "/api/person/v1", "GET");
         assertLinks(result, "Create", "/api/person/v1", "POST");
         assertLinks(result, "Update", "/api/person/v1", "PUT");
         assertLinks(result, "Delete", "/api/person/v1/1", "DELETE");
@@ -148,7 +148,7 @@ class PersonServicesTest {
         var personOne = people.get(1);
 
         assertLinks(personOne, "self", "/api/person/v1/1", "GET");
-        assertLinks(personOne, "FindAll", "/api/person/v1/all", "GET");
+        assertLinks(personOne, "FindAll", "/api/person/v1", "GET");
         assertLinks(personOne, "Create", "/api/person/v1", "POST");
         assertLinks(personOne, "Update", "/api/person/v1", "PUT");
         assertLinks(personOne, "Delete", "/api/person/v1/1", "DELETE");

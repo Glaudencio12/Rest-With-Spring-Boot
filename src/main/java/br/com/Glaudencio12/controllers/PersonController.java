@@ -35,7 +35,7 @@ public class PersonController implements PersonControllerDocs {
     }
 
     //@CrossOrigin(origins = "http://localhost:8080") -> Configuração do cors diretamente no endpoint
-    @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
     @Override
     public List<PersonDTO> findAll() {
         return services.findAll();
