@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,9 +67,7 @@ public interface PersonControllerDocs {
             }
     )
     ResponseEntity<Page<PersonDTO>> findAll(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "12") Integer size,
-            @RequestParam(value = "direction", defaultValue = "asc") String direction
+            @PageableDefault(page = 0, size = 12, sort = "firstName", direction = Direction.ASC) Pageable pageable
     );
 
     @Operation(summary = "Update a person's data", description = "Update a person's data by passing their respective ID", tags = {"People"},

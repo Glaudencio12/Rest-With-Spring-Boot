@@ -32,7 +32,7 @@ public class PersonServices {
 
     private void hateoasLinks(PersonDTO dto) {
         dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET").withTitle("Finding one person"));
-        dto.add(linkTo(methodOn(PersonController.class).findAll(1, 12, "asc")).withRel("FindAll").withType("GET").withTitle("Find All persons"));
+        dto.add(linkTo(methodOn(PersonController.class).findAll(null)).withRel("FindAll").withType("GET").withTitle("Find All persons"));
         dto.add(linkTo(methodOn(PersonController.class).create(dto)).withRel("Create").withType("POST").withTitle("Create a person"));
         dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("Update").withType("PUT").withTitle("Updating a person"));
         dto.add(linkTo(methodOn(PersonController.class).enablePerson(dto.getId())).withRel("Patch").withType("PATCH").withTitle("Disables the status of the person"));
