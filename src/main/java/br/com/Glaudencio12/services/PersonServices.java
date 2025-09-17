@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -30,7 +32,7 @@ public class PersonServices {
 
     private void hateoasLinks(PersonDTO dto) {
         dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET").withTitle("Finding one person"));
-        dto.add(linkTo(methodOn(PersonController.class).findAll()).withRel("FindAll").withType("GET").withTitle("Find All persons"));
+        dto.add(linkTo(methodOn(PersonController.class).findAll(1, 12, "asc")).withRel("FindAll").withType("GET").withTitle("Find All persons"));
         dto.add(linkTo(methodOn(PersonController.class).create(dto)).withRel("Create").withType("POST").withTitle("Create a person"));
         dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("Update").withType("PUT").withTitle("Updating a person"));
         dto.add(linkTo(methodOn(PersonController.class).enablePerson(dto.getId())).withRel("Patch").withType("PATCH").withTitle("Disables the status of the person"));
@@ -49,11 +51,14 @@ public class PersonServices {
         return dto;
     }
 
-    public List<PersonDTO> findAll(){
+    public Page<PersonDTO> findAll(Pageable pageable){
         logger.info("Find all Peoples!");
-        var dtos = ObjectMapper.parseListObjects(repository.findAll(), PersonDTO.class);
-        dtos.forEach(p -> hateoasLinks(p));
-        return dtos;
+        var persons = repository.findAll(pageable);
+        return persons.map(person -> {
+            var dto = ObjectMapper.parseObject(person, PersonDTO.class);
+            hateoasLinks(dto);
+            return dto;
+        });
     }
 
     public PersonDTO findByiD(Long id){
