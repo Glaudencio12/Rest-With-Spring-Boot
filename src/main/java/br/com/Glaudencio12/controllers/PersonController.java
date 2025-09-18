@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +43,7 @@ public class PersonController implements PersonControllerDocs {
     //@CrossOrigin(origins = "http://localhost:8080") -> Configuração do cors diretamente no endpoint
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
     @Override
-    public ResponseEntity<Page<PersonDTO>> findAll(
+    public ResponseEntity<PagedModel<EntityModel<PersonDTO>>> findAll(
             @PageableDefault(
                     page = 0,
                     size = 12,

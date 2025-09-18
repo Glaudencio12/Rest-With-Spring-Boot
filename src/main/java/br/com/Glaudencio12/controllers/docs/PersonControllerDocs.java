@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,7 +68,7 @@ public interface PersonControllerDocs {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    ResponseEntity<Page<PersonDTO>> findAll(
+    ResponseEntity<PagedModel<EntityModel<PersonDTO>>> findAll(
             @PageableDefault(page = 0, size = 12, sort = "firstName", direction = Direction.ASC) Pageable pageable
     );
 

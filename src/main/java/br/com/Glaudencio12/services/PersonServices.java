@@ -13,6 +13,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -29,6 +34,9 @@ public class PersonServices {
     private final Logger logger = LoggerFactory.getLogger(PersonServices.class.getName());
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PagedResourcesAssembler<PersonDTO> assembler;
 
     private void hateoasLinks(PersonDTO dto) {
         dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET").withTitle("Finding one person"));
@@ -51,14 +59,16 @@ public class PersonServices {
         return dto;
     }
 
-    public Page<PersonDTO> findAll(Pageable pageable){
+    public PagedModel<EntityModel<PersonDTO>> findAll(Pageable pageable){
         logger.info("Find all Peoples!");
         var persons = repository.findAll(pageable);
-        return persons.map(person -> {
+        var personWithLinks = persons.map(person -> {
             var dto = ObjectMapper.parseObject(person, PersonDTO.class);
             hateoasLinks(dto);
             return dto;
         });
+
+        return assembler.toModel(personWithLinks);
     }
 
     public PersonDTO findByiD(Long id){
